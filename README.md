@@ -12,7 +12,7 @@ All data used to seed the database is aquired through the use of the jolpica-f1 
 - Python3
 - PostgreSQL
   
-## Packages
+### Packages
 - `pip install sqlalchemy psycopg2-binary python-dotenv textual textual-dev rich bcrypt requests`
 
 ### Building and Seeding the Database
