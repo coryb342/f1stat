@@ -90,5 +90,17 @@ Once you have finished creating your account, you will arrive at the main screen
    - 2025
 5. Hit Fetch Stats
 
-### NOTE: Although the pages are mostly scrollable within the terminal, sometimes you may need to extend the terminal to see everything. 
+**NOTE: Although the pages are mostly scrollable within the terminal, sometimes you may need to extend the terminal to see everything.**
+
+## Screenshots
+
+<img width="883" height="681" alt="f1statlogin" src="https://github.com/user-attachments/assets/e864edd1-37e6-4c08-9ec8-2192c31e6194" />
+<img width="883" height="681" alt="f1stathome" src="https://github.com/user-attachments/assets/5c3dc572-8c54-4720-8d48-e1a357a8e410" />
+<img width="883" height="757" alt="f1statdriverselect" src="https://github.com/user-attachments/assets/dd0b894a-6361-4c3a-94e1-8b48225b86f8" />
+<img width="883" height="757" alt="f1statdriverstatselect" src="https://github.com/user-attachments/assets/0c0b6952-bef1-4087-8b94-7a67b09d1d70" />
+<img width="883" height="757" alt="f1statdriverstattable" src="https://github.com/user-attachments/assets/7d0cb800-5041-4433-b6cd-3479624d0df6" />
+https://github.com/user-attachments/assets/8c61f549-8d3b-4e20-a56b-9058a9808801
+
+
+
 
