@@ -5,7 +5,7 @@ All data used to seed the database is aquired through the use of the jolpica-f1 
 
 **Author**: Cory Bateman
 
-**Date Last Updated**: 05/04/2026
+**Date Last Updated**: 05/13/2026
 
 ## Getting Started
 ### Requirements
@@ -18,7 +18,7 @@ All data used to seed the database is aquired through the use of the jolpica-f1 
 ### Building and Seeding the Database
 1. Create an empty db in postgres
    - `createdb <dbname>`
-2. Update the .env file with your db parameters. You will need:
+2. Copy the .env.example as .env file and add your db parameters. You will need:
    - DB_NAME
    - DB_USERNAME
    - DB_PASSWORD
@@ -26,6 +26,7 @@ All data used to seed the database is aquired through the use of the jolpica-f1 
    - DB_PORT
 3. To Build and Seed the Database Run the following command from the project root:
    - `python3 db_builder.py --seed`
+   This will seed the database with data from the 2023, 2024, and 2025 seasons. Working on a feature to be able to select the years to seed with.
    Note: If you need to rebuild and not re-seed, just drop the --seed. (Useful if future tables are added)
 
 ### Running the Application
@@ -51,7 +52,8 @@ Once you have finished creating your account, you will arrive at the main screen
 - List all Circuits
 - List all Drivers
 ### Getting Session Results
-1. First Select Session Type (Race or Quali)
+1. From the main menu select Session Results
+2. Select Session Type (Race or Quali)
    - Race session provides:
      - Session Details
      - Driver Info
@@ -67,13 +69,13 @@ Once you have finished creating your account, you will arrive at the main screen
      - Q1 Time (When Applicaple)
      - Q2 Time (When Applicaple)
      - Q3 Time (When Applicable)
-2. Next, select the Driver(s).
-3. Then, select the Circuit(s):
-4. Finally, select season year(s):
-5. Hit Fetch Results
+3. Next, select the Driver(s).
+4. Then, select the Circuit(s):
+5. Finally, select season year(s):
+6. Hit Fetch Results
 
 ### Getting Driver Stats
-1. From the main menu select See Driver Statistics.
+1. From the main menu select Driver Stats.
 2. Select driver(s) from the list and hit continue.
 3. Choose stat(s):
    - Number of Pole Positions
@@ -84,5 +86,7 @@ Once you have finished creating your account, you will arrive at the main screen
    - 2023
    - 2024
    - 2025
-5. Hit Fetch Results
+5. Hit Fetch Stats
+
+### NOTE: Although the pages are mostly scrollable within the terminal, sometimes you may need to extend the terminal to see everything. 
 
