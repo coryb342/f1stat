@@ -1,7 +1,9 @@
 ## About
 F1Stats is a simple application that allows you to view driver stats, race results and qualifying results from the 2023, 2024, and 2025 seasons.
 
-All data used to seed the database is aquired through the use of the jolpica-f1 API.
+User interface built using Textual: https://textual.textualize.io/
+
+All data used to seed the database is aquired through the use of the jolpica-f1 API: https://github.com/jolpica/jolpica-f1.
 
 **Author**: Cory Bateman
 
