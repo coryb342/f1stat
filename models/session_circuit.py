@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from db import Base
+from declarative_base import Base
 
 class Session_Circuit(Base):
     __tablename__ = "session_circuit"

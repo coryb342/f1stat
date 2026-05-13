@@ -1,17 +1,11 @@
-from sqlalchemy import select
 from textual.screen import Screen
 from textual.widgets import Button, Pretty, SelectionList, Static
 from textual.containers import Center, Horizontal
-from db import establish_connection
-from models.driver import Driver
 from ui.banners import generateBanner
 from textual import on
 from textual.events import Mount
 from ui.driver_stats_select import DriverStatsSelectScreen
 
-db_conn = establish_connection()
-driver_stmt = select(Driver).order_by(Driver.last_name)
-drivers = db_conn.execute(driver_stmt).scalars().all()
 
 class DriverSelectScreen(Screen):
     CSS_PATH = "styles.tcss"
@@ -25,7 +19,7 @@ class DriverSelectScreen(Screen):
             yield Button(f"{self.select_all_text}", id="select-all-button")
             yield Horizontal(
                 SelectionList(
-                    *[(f"{d.first_name} {d.last_name}", d.driver_code) for d in drivers]
+                    *[(f"{d.first_name} {d.last_name}", d.driver_code) for d in self.app.drivers]
                 ),
                 Pretty([])
             )

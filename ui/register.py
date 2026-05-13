@@ -1,16 +1,9 @@
 from textual.screen import Screen
 from textual.widgets import Button, Input, Static, Select
 from textual.containers import Center, Vertical, Horizontal
-from db import establish_connection
-from models.user import User
-from models.driver import Driver
-from sqlalchemy import select
+from db import findUser, createUser
 import bcrypt
 from ui.banners import generateBanner
-
-db_conn = establish_connection()
-driver_stmt = select(Driver).order_by(Driver.last_name)
-drivers = db_conn.execute(driver_stmt).scalars().all()
 
 class RegisterScreen(Screen):
     CSS_PATH = "styles.tcss"
@@ -25,7 +18,7 @@ class RegisterScreen(Screen):
                 Input(placeholder="First Name", id="first-name-input"),
                 Input(placeholder="Last Name", id="last-name-input"),
                 Input(placeholder="Password", password=True, id="password-input"),
-                Select(id="favorite-driver-input", options=[(f"{driver.first_name} {driver.last_name}", driver.driver_code) for driver in drivers], prompt="Select Favorite Driver", classes="verticalSelect"),  
+                Select(id="favorite-driver-input", options=[(f"{driver.first_name} {driver.last_name}", driver.driver_code) for driver in self.app.drivers], prompt="Select Favorite Driver", classes="verticalSelect"),  
             )
         with Center():
             yield Horizontal(
@@ -34,7 +27,6 @@ class RegisterScreen(Screen):
                     Button("Exit", id="exit-button", classes="gap-left"),
                 )
             
-        
     def on_button_pressed(self, event):
         if event.button.id == "register-button":
             email = self.query_one("#email-input", Input).value
@@ -48,8 +40,7 @@ class RegisterScreen(Screen):
                 error.update("All fields are required")
                 return
 
-            stmt = select(User).where(User.email == email)
-            existing_user = db_conn.execute(stmt).scalars().first()
+            existing_user = findUser(self, email)
 
             if existing_user:
                 error.update("A user with that email already exists")
@@ -57,16 +48,16 @@ class RegisterScreen(Screen):
                 return
 
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-            new_user = User(
-                email=email,
-                first_name=first_name,
-                last_name=last_name,
-                favorite_driver=favorite_driver,
-                password=hashed_password.decode('utf-8')
-            )
 
-            db_conn.add(new_user)
-            db_conn.commit()
+            user_data = {
+                'email': email,
+                'first_name': first_name,
+                'last_name': last_name,
+                'favorite_driver': favorite_driver,
+                'password': hashed_password.decode('utf-8')
+            }
+            
+            createUser(self, user_data)
 
             self.dismiss("Registration successful! Please log in.")
 

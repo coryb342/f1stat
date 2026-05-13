@@ -1,5 +1,5 @@
 from db import *
-import models
+from declarative_base import Base
 from seeders.constructor_seeder import seed_constructors
 from seeders.circuit_seeder import seed_circuits
 from seeders.driver_seeder import seed_drivers

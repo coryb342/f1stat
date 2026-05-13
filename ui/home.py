@@ -1,16 +1,12 @@
-from sqlalchemy import select
 from textual.screen import Screen
 from textual.widgets import OptionList, Static
 from textual.widgets.option_list import Option
 from textual.containers import Center, Vertical
-from db import establish_connection
-from models.driver import Driver
 from ui.banners import generateBanner
 from ui.circuits_table import CircuitsTableScreen
 from ui.drivers_table import DriversTableScreen
 from ui.driver_select import DriverSelectScreen
-
-db_conn = establish_connection()
+from db import findUsersFavoriteDriver
 
 class HomeScreen(Screen):
     CSS_PATH = "styles.tcss"
@@ -19,8 +15,7 @@ class HomeScreen(Screen):
         self.user = self.app.user
 
     def greet_user(self, user):
-        favorite_driver_stmt = select(Driver).where(Driver.driver_code == user.favorite_driver)
-        favorite_driver = db_conn.execute(favorite_driver_stmt).scalars().first()
+        favorite_driver = findUsersFavoriteDriver(self, user)
         self.query_one("#welcome-message", Static).update(f"Welcome, {user.first_name} {user.last_name}!")
         self.query_one("#favorite-driver", Static).update(f"Your favorite driver, {favorite_driver.first_name} {favorite_driver.last_name}, says hello!")
 

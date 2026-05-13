@@ -1,15 +1,11 @@
 from textual.screen import Screen
 from textual.widgets import Button, Input, Static
 from textual.containers import Vertical, Horizontal, Center
-from db import establish_connection
-from models.user import User
-from sqlalchemy import select
 import bcrypt
 from ui.home import HomeScreen
 from ui.register import RegisterScreen
 from ui.banners import generateBanner
-
-db_conn = establish_connection()
+from db import findUser
 
 class LoginScreen(Screen):
     CSS_PATH = "styles.tcss"
@@ -47,8 +43,7 @@ class LoginScreen(Screen):
             password = self.query_one("#password-input", Input).value
             error = self.query_one("#error-message", Static)
 
-            stmt = select(User).where(User.email == email)
-            user = db_conn.execute(stmt).scalars().first()
+            user = findUser(self, email)
 
             if not user:
                 error.update("No user found with that email")

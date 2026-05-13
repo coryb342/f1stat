@@ -1,21 +1,9 @@
-from sqlalchemy import select
 from textual.screen import Screen
 from textual.widgets import Button, Pretty, SelectionList, Static, RadioButton, RadioSet
-from textual.widgets.option_list import Option
 from textual.containers import Center, Horizontal
-from db import establish_connection
-from models.driver import Driver
 from ui.banners import generateBanner
 from textual import on
 from textual.events import Mount
-from models.circuit import Circuit
-
-db_conn = establish_connection()
-circuit_stmt = select(Circuit).order_by(Circuit.circuit_name)
-circuits = db_conn.execute(circuit_stmt).scalars().all()
-
-driver_stmt = select(Driver).order_by(Driver.last_name)
-drivers = db_conn.execute(driver_stmt).scalars().all()
 
 SESSION_TYPE_MAP = {
     "Race Sessions": "R",
@@ -41,7 +29,7 @@ class SessionResultsSelectScreen(Screen):
             yield Button("Select All", id="select-all-drivers-button")
             yield Horizontal(
                 SelectionList(
-                    *[(f"{d.first_name} {d.last_name}", d.driver_code) for d in drivers], 
+                    *[(f"{d.first_name} {d.last_name}", d.driver_code) for d in self.app.drivers], 
                     id="selected-drivers-list"
                 ),
                 Pretty([], id="selected-drivers-pretty")
@@ -49,7 +37,7 @@ class SessionResultsSelectScreen(Screen):
             yield Button("Select All", id="select-all-circuits-button")
             yield Horizontal(
                 SelectionList(
-                    *[(f"{c.circuit_name} {c.country}", c.circuit_name) for c in circuits], 
+                    *[(f"{c.circuit_name} {c.country}", c.circuit_name) for c in self.app.circuits], 
                     id="selected-circuits-list"
                 ),
                 Pretty([], id="selected-circuits-pretty")

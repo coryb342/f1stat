@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from db import Base
+from declarative_base import Base
 
 class Race_Result(Base):
     __tablename__ = "race_results"

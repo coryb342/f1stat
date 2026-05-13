@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String
-from db import Base
+from declarative_base import Base
 
 class Circuit(Base):
     __tablename__ = "circuits"

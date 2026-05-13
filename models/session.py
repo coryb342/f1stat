@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Date
-from db import Base
+from declarative_base import Base
 
 class Session(Base):
     __tablename__ = "sessions"

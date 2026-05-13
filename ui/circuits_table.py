@@ -2,14 +2,7 @@ from textual.screen import Screen
 from textual.app import ComposeResult
 from textual.widgets import Button, DataTable, Static
 from textual.containers import Center, Vertical, Horizontal
-from models.circuit import Circuit
 from ui.banners import generateBanner
-from db import establish_connection
-from sqlalchemy import select
-
-db_conn = establish_connection()
-circuit_stmt = select(Circuit).order_by(Circuit.circuit_name)
-circuits = db_conn.execute(circuit_stmt).scalars().all()
 
 class CircuitsTableScreen(Screen):
     CSS_PATH = "styles.tcss"
@@ -33,7 +26,7 @@ class CircuitsTableScreen(Screen):
         data_table.add_columns("Circuit Name", "Location", "Country")
         data_table.cursor_type = "row"
         data_table.zebra_stripes = True
-        for c in circuits:
+        for c in self.app.circuits:
             data_table.add_row(c.circuit_name, c.location, c.country)
 
     def on_button_pressed(self, event):
