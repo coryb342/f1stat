@@ -28,8 +28,10 @@ All data used to seed the database is aquired through the use of the jolpica-f1 
    - DB_PORT
 3. To Build and Seed the Database Run the following command from the project root:
    - `python3 db_builder.py --seed`
+     
    This will seed the database with data from the 2023, 2024, and 2025 seasons. Working on a feature to be able to select the years to seed with.
-   Note: If you need to rebuild and not re-seed, just drop the --seed. (Useful if future tables are added)
+
+   **Note: If you need to rebuild and not re-seed, just drop the --seed. (Useful if future tables are added)**
 
 ### Running the Application
 Simple as running `python3 main.py` from the project root.
